@@ -50,6 +50,16 @@
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
+
+        /* Masquer la scrollbar pour Chrome, Safari et Opera */
+    .no-scrollbar::-webkit-scrollbar {
+        display: none;
+    }
+    /* Masquer la scrollbar pour IE, Edge et Firefox */
+    .no-scrollbar {
+        -ms-overflow-style: none;  /* IE and Edge */
+        scrollbar-width: none;  /* Firefox */
+    }
     </style>
 </head>
 <body class="bg-gray-50 text-gray-800 font-sans antialiased selection:bg-blue-900 selection:text-white">
@@ -73,31 +83,39 @@
         </div>
     </nav>
 
-    <header class="relative bg-slate-900 text-white pt-32 pb-20 px-4 text-center overflow-hidden">
-        <div class="absolute inset-0 opacity-20">
+    <header class="relative bg-slate-900 text-white pt-32 pb-24 px-4 overflow-hidden min-h-[600px] flex items-center justify-center">
+        <div class="absolute inset-0 opacity-15 z-0">
             <div class="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')]"></div>
         </div>
-        <div class="relative max-w-5xl mx-auto z-10">
+        
+        <div class="absolute top-0 left-0 w-full md:w-1/2 h-full z-0 pointer-events-none">
+            <img src="./images/PRG1-1-1.png" alt="S.E. Le Général Mamady Doumbouya" class="w-full h-full object-cover object-top opacity-30 md:opacity-80">
             
-            <div class="opacity-0 animate-fade-in-up [animation-delay:200ms] inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/10 border border-white/20 text-sm mb-6">
+            <div class="absolute bottom-0 left-0 w-full h-1/3 bg-gradient-to-t from-slate-900 to-transparent"></div>
+            <div class="absolute top-0 right-0 w-1/3 h-full bg-gradient-to-l from-slate-900 to-transparent hidden md:block"></div>
+        </div>
+
+        <div class="relative z-10 flex flex-col items-center justify-center text-center space-y-6 max-w-4xl mx-auto w-full">
+            
+            <div class="opacity-0 animate-fade-in-up [animation-delay:200ms] inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/10 border border-white/20 text-sm">
                 <span class="w-2 h-2 rounded-full bg-green-400 animate-pulse"></span>
-                Panel National - 22 Février 2026
+                Panel National - 22 Avril 2026
             </div>
             
-            <h1 class="opacity-0 animate-fade-in-up [animation-delay:400ms] text-5xl md:text-7xl font-extrabold mb-6 tracking-tight">
+            <h1 class="opacity-0 animate-fade-in-up [animation-delay:400ms] text-4xl md:text-5xl lg:text-7xl font-extrabold tracking-tight leading-tight">
                 L'IA AU CŒUR DE <br>
                 <span class="gradient-text">SIMANDOU</span>
             </h1>
             
-            <p class="opacity-0 animate-fade-in-up [animation-delay:600ms] text-xl md:text-2xl mb-4 font-light text-gray-300 max-w-3xl mx-auto">
+            <p class="opacity-0 animate-fade-in-up [animation-delay:600ms] text-xl font-light text-gray-300 max-w-2xl">
                 Intelligence Artificielle et Transformation des Organisations en Guinée
             </p>
             
-            <p class="opacity-0 animate-fade-in-up [animation-delay:800ms] text-md text-guinea-yellow font-medium mb-10">
+            <p class="opacity-0 animate-fade-in-up [animation-delay:800ms] text-md text-guinea-yellow font-medium pt-2">
                 <i class="fa-solid fa-star text-xs mr-2"></i>Sous le Haut Patronage de S.E. Le Général Mamady Doumbouya
             </p>
             
-            <div class="opacity-0 animate-fade-in-up [animation-delay:1000ms] flex flex-col sm:flex-row justify-center gap-4">
+            <div class="opacity-0 animate-fade-in-up [animation-delay:1000ms] flex flex-col sm:flex-row gap-4 pt-6">
                 <a href="#inscription" class="bg-guinea-yellow hover:bg-yellow-400 text-slate-900 font-bold py-4 px-8 rounded-full transition duration-300 transform hover:-translate-y-1 shadow-xl">
                     <i class="fa-solid fa-qrcode mr-2"></i> S'inscrire maintenant
                 </a>
@@ -155,37 +173,73 @@
         </div>
     </section>
 
-    <section id="themes" class="bg-gray-900 text-white py-20 px-4">
-        <div class="max-w-6xl mx-auto">
-            <div class="text-center mb-16">
-                <h2 class="text-3xl md:text-4xl font-bold mb-4">Thématiques Principales</h2>
-                <p class="text-gray-400 max-w-2xl mx-auto">Comment l'intelligence artificielle peut transformer la révolution minière et économique de la Guinée.</p>
-            </div>
-            <div class="grid md:grid-cols-3 gap-8">
-                <div class="bg-slate-800 p-8 rounded-2xl hover:bg-slate-700 transition duration-300 border border-slate-700 hover:-translate-y-2">
-                    <div class="w-14 h-14 bg-blue-900/50 rounded-xl flex items-center justify-center text-blue-400 text-2xl mb-6">
-                        <i class="fa-solid fa-brain"></i>
-                    </div>
-                    <h3 class="font-bold text-xl mb-3">L'IA dans l'économie</h3>
-                    <p class="text-gray-400 text-sm">Définition, évolution et principales technologies de l'IA appliquées pour booster l'économie guinéenne de demain.</p>
-                </div>
-                <div class="bg-slate-800 p-8 rounded-2xl hover:bg-slate-700 transition duration-300 border border-slate-700 hover:-translate-y-2">
-                    <div class="w-14 h-14 bg-yellow-900/50 rounded-xl flex items-center justify-center text-yellow-400 text-2xl mb-6">
-                        <i class="fa-solid fa-mountain-sun"></i>
-                    </div>
-                    <h3 class="font-bold text-xl mb-3">Secteur Minier</h3>
-                    <p class="text-gray-400 text-sm">Analyse automatisée des données financières, détection des fraudes et amélioration drastique du contrôle interne.</p>
-                </div>
-                <div class="bg-slate-800 p-8 rounded-2xl hover:bg-slate-700 transition duration-300 border border-slate-700 hover:-translate-y-2">
-                    <div class="w-14 h-14 bg-green-900/50 rounded-xl flex items-center justify-center text-green-400 text-2xl mb-6">
-                        <i class="fa-solid fa-leaf"></i>
-                    </div>
-                    <h3 class="font-bold text-xl mb-3">Transformation</h3>
-                    <p class="text-gray-400 text-sm">Amélioration de la productivité, de la sécurité au travail et de la gestion environnementale responsable.</p>
-                </div>
-            </div>
+ <section id="themes" class="bg-gray-900 text-white py-20 px-4 overflow-hidden">
+    <div class="max-w-7xl mx-auto">
+        <div class="text-center mb-16">
+            <h2 class="text-3xl md:text-4xl font-bold mb-4">L'IA au service des Axes Stratégiques</h2>
+            <p class="text-gray-400 max-w-2xl mx-auto">Comment l'Intelligence Artificielle peut agir comme catalyseur pour atteindre les objectifs de modernisation de la Guinée d'ici 2040.</p>
         </div>
-    </section>
+        
+        <div class="flex overflow-x-auto snap-x snap-mandatory gap-6 pb-8 no-scrollbar -mx-4 px-4 md:mx-0 md:px-0">
+            
+            <div class="flex-none w-[85vw] sm:w-[350px] snap-center bg-slate-800 p-8 rounded-2xl hover:bg-slate-700 transition duration-300 border border-slate-700 hover:-translate-y-2 group">
+                <div class="w-14 h-14 bg-green-900/50 rounded-xl flex items-center justify-center text-green-400 text-2xl mb-6 group-hover:scale-110 transition">
+                    <i class="fa-solid fa-seedling"></i>
+                </div>
+                <h3 class="font-bold text-xl mb-3">Agriculture, Industrie & Commerce</h3>
+                <p class="text-gray-400 text-sm leading-relaxed">
+                    Optimisation des rendements agricoles par l'analyse prédictive des sols et du climat, gestion intelligente des chaînes d'approvisionnement et contrôle qualité automatisé pour propulser le "Green Business".
+                </p>
+            </div>
+
+            <div class="flex-none w-[85vw] sm:w-[350px] snap-center bg-slate-800 p-8 rounded-2xl hover:bg-slate-700 transition duration-300 border border-slate-700 hover:-translate-y-2 group">
+                <div class="w-14 h-14 bg-purple-900/50 rounded-xl flex items-center justify-center text-purple-400 text-2xl mb-6 group-hover:scale-110 transition">
+                    <i class="fa-solid fa-graduation-cap"></i>
+                </div>
+                <h3 class="font-bold text-xl mb-3">Éducation & Culture</h3>
+                <p class="text-gray-400 text-sm leading-relaxed">
+                    Mise en place de parcours d'apprentissage personnalisés via des tuteurs intelligents, analyse de données pour prévenir le décrochage scolaire, et préservation numérique du patrimoine touristique.
+                </p>
+            </div>
+
+            <div class="flex-none w-[85vw] sm:w-[350px] snap-center bg-slate-800 p-8 rounded-2xl hover:bg-slate-700 transition duration-300 border border-slate-700 hover:-translate-y-2 group">
+                <div class="w-14 h-14 bg-cyan-900/50 rounded-xl flex items-center justify-center text-cyan-400 text-2xl mb-6 group-hover:scale-110 transition">
+                    <i class="fa-solid fa-network-wired"></i>
+                </div>
+                <h3 class="font-bold text-xl mb-3">Infrastructures & Transports</h3>
+                <p class="text-gray-400 text-sm leading-relaxed">
+                    Déploiement de la maintenance prédictive pour les routes et équipements lourds, gestion intelligente du trafic en temps réel, et optimisation des réseaux de connectivité et de logistique.
+                </p>
+            </div>
+
+            <div class="flex-none w-[85vw] sm:w-[350px] snap-center bg-slate-800 p-8 rounded-2xl hover:bg-slate-700 transition duration-300 border border-slate-700 hover:-translate-y-2 group">
+                <div class="w-14 h-14 bg-yellow-900/50 rounded-xl flex items-center justify-center text-yellow-400 text-2xl mb-6 group-hover:scale-110 transition">
+                    <i class="fa-solid fa-chart-line"></i>
+                </div>
+                <h3 class="font-bold text-xl mb-3">Économie, Finance & Assurance</h3>
+                <p class="text-gray-400 text-sm leading-relaxed">
+                    Détection automatisée des fraudes, évaluation algorithmique des risques pour faciliter l'octroi de crédits, et création de services financiers sur mesure pour stimuler l'inclusion financière.
+                </p>
+            </div>
+
+            <div class="flex-none w-[85vw] sm:w-[350px] snap-center bg-slate-800 p-8 rounded-2xl hover:bg-slate-700 transition duration-300 border border-slate-700 hover:-translate-y-2 group">
+                <div class="w-14 h-14 bg-red-900/50 rounded-xl flex items-center justify-center text-red-400 text-2xl mb-6 group-hover:scale-110 transition">
+                    <i class="fa-solid fa-heart-pulse"></i>
+                </div>
+                <h3 class="font-bold text-xl mb-3">Santé & Bien-être</h3>
+                <p class="text-gray-400 text-sm leading-relaxed">
+                    Diagnostic assisté par l'analyse d'imagerie médicale, modélisation prédictive des épidémies pour une meilleure prévention, et rationalisation de la gestion des futurs hôpitaux numérisés.
+                </p>
+            </div>
+
+        </div>
+        
+        <div class="flex justify-center mt-6 text-gray-500 animate-pulse md:hidden">
+            <i class="fa-solid fa-arrows-left-right mr-2"></i> Glissez pour voir plus
+        </div>
+
+    </div>
+</section>
 
     <section id="intervenants" class="py-20 px-4 bg-gray-50">
         <div class="max-w-6xl mx-auto">

@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html lang="fr" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IA au Cœur de Simandou | Panel National</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: { sans: ['Inter', 'sans-serif'] },
+                    colors: {
+                        guinea: { red: '#CE1126', yellow: '#FCD116', green: '#009460' }
+                    },
+                    /* Définition de nos propres animations */
+                    animation: {
+                        'fade-in-up': 'fadeInUp 0.8s ease-out forwards',
+                        'fade-in': 'fadeIn 1s ease-out forwards',
+                    },
+                    keyframes: {
+                        fadeInUp: {
+                            '0%': { opacity: '0', transform: 'translateY(30px)' },
+                            '100%': { opacity: '1', transform: 'translateY(0)' },
+                        },
+                        fadeIn: {
+                            '0%': { opacity: '0' },
+                            '100%': { opacity: '1' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+
+    <style>
+        /* Styles pour l'impression du billet */
+        @media print {
+            body * { visibility: hidden; }
+            #ticketResult, #ticketResult * { visibility: visible; }
+            #ticketResult { position: absolute; left: 0; top: 0; width: 100%; }
+            .no-print { display: none !important; }
+        }
+        .gradient-text {
+            background: linear-gradient(to right, #60a5fa, #FCD116);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+    </style>
+</head>
+<body class="bg-gray-50 text-gray-800 font-sans antialiased selection:bg-blue-900 selection:text-white">
+
+    <nav class="fixed w-full z-50 bg-white/90 backdrop-blur-md border-b border-gray-200 shadow-sm transition-all duration-300 opacity-0 animate-fade-in">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16 items-center">
+                <div class="flex-shrink-0 font-bold text-xl text-blue-900">
+                    <i class="fa-solid fa-microchip text-guinea-yellow mr-2"></i>SIMANDOU<span class="text-blue-600">.AI</span>
+                </div>
+                <div class="hidden md:flex space-x-8">
+                    <a href="#contexte" class="text-gray-600 hover:text-blue-900 font-medium transition">Contexte</a>
+                    <a href="#themes" class="text-gray-600 hover:text-blue-900 font-medium transition">Thématiques</a>
+                    <a href="#intervenants" class="text-gray-600 hover:text-blue-900 font-medium transition">Intervenants</a>
+                    <a href="#programme" class="text-gray-600 hover:text-blue-900 font-medium transition">Programme</a>
+                </div>
+                <a href="#inscription" class="hidden md:inline-flex bg-blue-900 hover:bg-blue-800 text-white px-5 py-2 rounded-full font-medium transition shadow-lg shadow-blue-900/30">
+                    Obtenir mon Pass
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <header class="relative bg-slate-900 text-white pt-32 pb-20 px-4 text-center overflow-hidden">
+        <div class="absolute inset-0 opacity-20">
+            <div class="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')]"></div>
+        </div>
+        <div class="relative max-w-5xl mx-auto z-10">
+            
+            <div class="opacity-0 animate-fade-in-up [animation-delay:200ms] inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/10 border border-white/20 text-sm mb-6">
+                <span class="w-2 h-2 rounded-full bg-green-400 animate-pulse"></span>
+                Panel National - 22 Février 2026
+            </div>
+            
+            <h1 class="opacity-0 animate-fade-in-up [animation-delay:400ms] text-5xl md:text-7xl font-extrabold mb-6 tracking-tight">
+                L'IA AU CŒUR DE <br>
+                <span class="gradient-text">SIMANDOU</span>
+            </h1>
+            
+            <p class="opacity-0 animate-fade-in-up [animation-delay:600ms] text-xl md:text-2xl mb-4 font-light text-gray-300 max-w-3xl mx-auto">
+                Intelligence Artificielle et Transformation des Organisations en Guinée
+            </p>
+            
+            <p class="opacity-0 animate-fade-in-up [animation-delay:800ms] text-md text-guinea-yellow font-medium mb-10">
+                <i class="fa-solid fa-star text-xs mr-2"></i>Sous le Haut Patronage de S.E. Le Général Mamady Doumbouya
+            </p>
+            
+            <div class="opacity-0 animate-fade-in-up [animation-delay:1000ms] flex flex-col sm:flex-row justify-center gap-4">
+                <a href="#inscription" class="bg-guinea-yellow hover:bg-yellow-400 text-slate-900 font-bold py-4 px-8 rounded-full transition duration-300 transform hover:-translate-y-1 shadow-xl">
+                    <i class="fa-solid fa-qrcode mr-2"></i> S'inscrire maintenant
+                </a>
+                <a href="#programme" class="bg-white/10 hover:bg-white/20 border border-white/30 text-white font-medium py-4 px-8 rounded-full transition duration-300 backdrop-blur-sm">
+                    Voir le programme
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <div class="opacity-0 animate-fade-in-up [animation-delay:1200ms] bg-white shadow-lg rounded-2xl mx-4 md:max-w-4xl md:mx-auto -mt-10 relative z-20 grid grid-cols-1 md:grid-cols-3 divide-y md:divide-y-0 md:divide-x divide-gray-100 text-center p-6">
+        <div class="p-4">
+            <i class="fa-solid fa-users text-3xl text-blue-600 mb-2"></i>
+            <h3 class="text-2xl font-bold text-gray-900">150 - 250</h3>
+            <p class="text-gray-500 text-sm">Participants attendus</p>
+        </div>
+        <div class="p-4">
+            <i class="fa-solid fa-bullseye text-3xl text-guinea-red mb-2"></i>
+            <h3 class="text-2xl font-bold text-gray-900">1 Objectif</h3>
+            <p class="text-gray-500 text-sm">Modernisation nationale</p>
+        </div>
+        <div class="p-4">
+            <i class="fa-solid fa-handshake text-3xl text-guinea-green mb-2"></i>
+            <h3 class="text-2xl font-bold text-gray-900">Synergie</h3>
+            <p class="text-gray-500 text-sm">Public, Privé & Académique</p>
+        </div>
+    </div>
+
+    <section id="contexte" class="py-20 px-4 max-w-6xl mx-auto">
+        <div class="grid md:grid-cols-2 gap-12 items-center">
+            <div>
+                <h2 class="text-sm font-bold text-blue-600 uppercase tracking-wide mb-2">Pourquoi ce panel ?</h2>
+                <h3 class="text-3xl md:text-4xl font-bold text-gray-900 mb-6">Un levier de croissance pour 2040</h3>
+                <p class="text-gray-600 mb-4 leading-relaxed">
+                    Dans des projets géants comme Simandou, l'Intelligence Artificielle peut améliorer la productivité, la sécurité, la rentabilité et la gestion environnementale. Pourtant, son intégration reste encore limitée en Guinée.
+                </p>
+                <ul class="space-y-3 mt-6">
+                    <li class="flex items-start"><i class="fa-solid fa-check-circle text-green-500 mt-1 mr-3"></i> <span class="text-gray-700">Sensibiliser les acteurs économiques.</span></li>
+                    <li class="flex items-start"><i class="fa-solid fa-check-circle text-green-500 mt-1 mr-3"></i> <span class="text-gray-700">Présenter des applications concrètes (Mines, Finance).</span></li>
+                    <li class="flex items-start"><i class="fa-solid fa-check-circle text-green-500 mt-1 mr-3"></i> <span class="text-gray-700">Créer un réseau d'acteurs de l'innovation.</span></li>
+                </ul>
+            </div>
+            <div class="grid grid-cols-2 gap-4">
+                <div class="bg-blue-50 p-6 rounded-2xl border border-blue-100 shadow-sm hover:shadow-md transition">
+                    <i class="fa-solid fa-building-shield text-blue-600 text-2xl mb-3"></i>
+                    <h4 class="font-bold text-gray-900 mb-2">Gouvernance</h4>
+                    <p class="text-sm text-gray-600">Amélioration du contrôle interne et détection d'anomalies.</p>
+                </div>
+                <div class="bg-yellow-50 p-6 rounded-2xl border border-yellow-100 shadow-sm mt-8 hover:shadow-md transition">
+                    <i class="fa-solid fa-chart-line text-yellow-600 text-2xl mb-3"></i>
+                    <h4 class="font-bold text-gray-900 mb-2">Performance</h4>
+                    <p class="text-sm text-gray-600">Automatisation des processus opérationnels et rentabilité.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="themes" class="bg-gray-900 text-white py-20 px-4">
+        <div class="max-w-6xl mx-auto">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold mb-4">Thématiques Principales</h2>
+                <p class="text-gray-400 max-w-2xl mx-auto">Comment l'intelligence artificielle peut transformer la révolution minière et économique de la Guinée.</p>
+            </div>
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="bg-slate-800 p-8 rounded-2xl hover:bg-slate-700 transition duration-300 border border-slate-700 hover:-translate-y-2">
+                    <div class="w-14 h-14 bg-blue-900/50 rounded-xl flex items-center justify-center text-blue-400 text-2xl mb-6">
+                        <i class="fa-solid fa-brain"></i>
+                    </div>
+                    <h3 class="font-bold text-xl mb-3">L'IA dans l'économie</h3>
+                    <p class="text-gray-400 text-sm">Définition, évolution et principales technologies de l'IA appliquées pour booster l'économie guinéenne de demain.</p>
+                </div>
+                <div class="bg-slate-800 p-8 rounded-2xl hover:bg-slate-700 transition duration-300 border border-slate-700 hover:-translate-y-2">
+                    <div class="w-14 h-14 bg-yellow-900/50 rounded-xl flex items-center justify-center text-yellow-400 text-2xl mb-6">
+                        <i class="fa-solid fa-mountain-sun"></i>
+                    </div>
+                    <h3 class="font-bold text-xl mb-3">Secteur Minier</h3>
+                    <p class="text-gray-400 text-sm">Analyse automatisée des données financières, détection des fraudes et amélioration drastique du contrôle interne.</p>
+                </div>
+                <div class="bg-slate-800 p-8 rounded-2xl hover:bg-slate-700 transition duration-300 border border-slate-700 hover:-translate-y-2">
+                    <div class="w-14 h-14 bg-green-900/50 rounded-xl flex items-center justify-center text-green-400 text-2xl mb-6">
+                        <i class="fa-solid fa-leaf"></i>
+                    </div>
+                    <h3 class="font-bold text-xl mb-3">Transformation</h3>
+                    <p class="text-gray-400 text-sm">Amélioration de la productivité, de la sécurité au travail et de la gestion environnementale responsable.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="intervenants" class="py-20 px-4 bg-gray-50">
+        <div class="max-w-6xl mx-auto">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold text-blue-900 mb-4">Un Panel d'Experts</h2>
+                <p class="text-gray-600 max-w-2xl mx-auto">Réunissant les acteurs clés du gouvernement, de l'industrie minière, de la tech et du monde académique.</p>
+            </div>
+            
+            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6 mb-16">
+                <div class="bg-white rounded-2xl p-6 text-center shadow-sm hover:shadow-xl transition duration-300 border border-gray-100 group">
+                    <img src="https://ui-avatars.com/api/?name=MPTEN+Gouv&background=0D8ABC&color=fff&size=100" alt="Avatar" class="w-20 h-20 rounded-full mx-auto mb-4 border-4 border-blue-50 group-hover:scale-110 transition duration-300">
+                    <h4 class="font-bold text-gray-900">Représentant État</h4>
+                    <p class="text-xs text-blue-600 font-medium mb-2">MPTEN / Mines</p>
+                    <p class="text-xs text-gray-500">Vision gouvernementale et cadre réglementaire.</p>
+                </div>
+                <div class="bg-white rounded-2xl p-6 text-center shadow-sm hover:shadow-xl transition duration-300 border border-gray-100 group">
+                    <img src="https://ui-avatars.com/api/?name=Expert+IA&background=FCD116&color=333&size=100" alt="Avatar" class="w-20 h-20 rounded-full mx-auto mb-4 border-4 border-yellow-50 group-hover:scale-110 transition duration-300">
+                    <h4 class="font-bold text-gray-900">Expert en IA</h4>
+                    <p class="text-xs text-yellow-600 font-medium mb-2">Spécialiste Tech</p>
+                    <p class="text-xs text-gray-500">Applications concrètes dans l'industrie et l'automatisation.</p>
+                </div>
+                <div class="bg-white rounded-2xl p-6 text-center shadow-sm hover:shadow-xl transition duration-300 border border-gray-100 group">
+                    <img src="https://ui-avatars.com/api/?name=Simandou+Projet&background=CE1126&color=fff&size=100" alt="Avatar" class="w-20 h-20 rounded-full mx-auto mb-4 border-4 border-red-50 group-hover:scale-110 transition duration-300">
+                    <h4 class="font-bold text-gray-900">Cadre Simandou</h4>
+                    <p class="text-xs text-guinea-red font-medium mb-2">CTG / WCS / Rio Tinto</p>
+                    <p class="text-xs text-gray-500">Intégration technologique sur le terrain minier.</p>
+                </div>
+                <div class="bg-white rounded-2xl p-6 text-center shadow-sm hover:shadow-xl transition duration-300 border border-gray-100 group">
+                    <img src="https://ui-avatars.com/api/?name=Univ+Prof&background=009460&color=fff&size=100" alt="Avatar" class="w-20 h-20 rounded-full mx-auto mb-4 border-4 border-green-50 group-hover:scale-110 transition duration-300">
+                    <h4 class="font-bold text-gray-900">Chercheur</h4>
+                    <p class="text-xs text-guinea-green font-medium mb-2">Universités Guinéennes</p>
+                    <p class="text-xs text-gray-500">Formation, compétences et recherche en Data.</p>
+                </div>
+            </div>
+
+            <div class="bg-blue-900 text-white rounded-3xl p-8 md:p-10 shadow-xl flex flex-col md:flex-row items-center justify-between gap-8 hover:shadow-2xl transition duration-300">
+                <div class="md:w-1/3">
+                    <h3 class="text-2xl font-bold mb-2">Comité d'Initiative</h3>
+                    <p class="text-blue-200 text-sm">En collaboration avec le Ministère des Postes, Télécommunications et de l'Économie Numérique (MPTEN).</p>
+                </div>
+                <div class="md:w-2/3 grid sm:grid-cols-3 gap-4 text-sm">
+                    <div class="bg-white/10 p-4 rounded-xl backdrop-blur-sm hover:bg-white/20 transition">
+                        <strong class="block text-white mb-1">M. Morlaye Soumah</strong>
+                        <span class="text-blue-200 text-xs">SG Ministère Pêche & Consultant BCRG</span>
+                    </div>
+                    <div class="bg-white/10 p-4 rounded-xl backdrop-blur-sm hover:bg-white/20 transition">
+                        <strong class="block text-white mb-1">M. N'Faly Sylla</strong>
+                        <span class="text-blue-200 text-xs">Chef de Cabinet MPTEN</span>
+                    </div>
+                    <div class="bg-white/10 p-4 rounded-xl backdrop-blur-sm hover:bg-white/20 transition">
+                        <strong class="block text-white mb-1">M. Mohamed Saliou Camara</strong>
+                        <span class="text-blue-200 text-xs">Expert Audit & Nouvelles Techs</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="programme" class="py-20 px-4 max-w-4xl mx-auto">
+        <h2 class="text-3xl md:text-4xl font-bold text-center text-gray-900 mb-12">Déroulement de la demi-journée</h2>
+        <div class="relative border-l-2 border-blue-200 ml-3 md:ml-6 space-y-8">
+            <div class="relative pl-8 group">
+                <div class="absolute w-6 h-6 bg-blue-600 rounded-full -left-[13px] top-1 border-4 border-white shadow group-hover:scale-125 transition duration-300"></div>
+                <div class="flex flex-col md:flex-row md:items-center gap-2 md:gap-6">
+                    <div class="font-bold text-blue-600 w-20">09h00</div>
+                    <div class="bg-white p-4 rounded-xl shadow-sm border border-gray-100 flex-1 hover:shadow-md transition">
+                        <h4 class="font-bold text-gray-900">Accueil et installation des participants</h4>
+                    </div>
+                </div>
+            </div>
+            <div class="relative pl-8 group">
+                <div class="absolute w-6 h-6 bg-blue-600 rounded-full -left-[13px] top-1 border-4 border-white shadow group-hover:scale-125 transition duration-300"></div>
+                <div class="flex flex-col md:flex-row md:items-center gap-2 md:gap-6">
+                    <div class="font-bold text-blue-600 w-20">09h30</div>
+                    <div class="bg-white p-4 rounded-xl shadow-sm border border-gray-100 flex-1 hover:shadow-md transition">
+                        <h4 class="font-bold text-gray-900">Mot d'ouverture officiel</h4>
+                    </div>
+                </div>
+            </div>
+            <div class="relative pl-8 group">
+                <div class="absolute w-6 h-6 bg-yellow-500 rounded-full -left-[13px] top-1 border-4 border-white shadow group-hover:scale-125 transition duration-300"></div>
+                <div class="flex flex-col md:flex-row md:items-center gap-2 md:gap-6">
+                    <div class="font-bold text-blue-600 w-20">09h45</div>
+                    <div class="bg-blue-50 p-4 rounded-xl border border-blue-100 flex-1 hover:shadow-md transition">
+                        <h4 class="font-bold text-blue-900">Présentation sur l'Intelligence Artificielle</h4>
+                        <p class="text-sm text-gray-600 mt-1">Introduction, concepts clés et enjeux pour la Guinée.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="relative pl-8 group">
+                <div class="absolute w-6 h-6 bg-yellow-500 rounded-full -left-[13px] top-1 border-4 border-white shadow group-hover:scale-125 transition duration-300"></div>
+                <div class="flex flex-col md:flex-row md:items-center gap-2 md:gap-6">
+                    <div class="font-bold text-blue-600 w-20">10h15</div>
+                    <div class="bg-blue-50 p-4 rounded-xl border border-blue-100 flex-1 hover:shadow-md transition">
+                        <h4 class="font-bold text-blue-900">Panel de discussion central</h4>
+                        <p class="text-sm text-gray-600 mt-1">Échanges entre experts, secteur privé et public.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="relative pl-8 group">
+                <div class="absolute w-6 h-6 bg-blue-600 rounded-full -left-[13px] top-1 border-4 border-white shadow group-hover:scale-125 transition duration-300"></div>
+                <div class="flex flex-col md:flex-row md:items-center gap-2 md:gap-6">
+                    <div class="font-bold text-blue-600 w-20">11h15</div>
+                    <div class="bg-white p-4 rounded-xl shadow-sm border border-gray-100 flex-1 hover:shadow-md transition">
+                        <h4 class="font-bold text-gray-900">Session Q&R avec le public</h4>
+                    </div>
+                </div>
+            </div>
+            <div class="relative pl-8 group">
+                <div class="absolute w-6 h-6 bg-blue-600 rounded-full -left-[13px] top-1 border-4 border-white shadow group-hover:scale-125 transition duration-300"></div>
+                <div class="flex flex-col md:flex-row md:items-center gap-2 md:gap-6">
+                    <div class="font-bold text-blue-600 w-20">11h45</div>
+                    <div class="bg-white p-4 rounded-xl shadow-sm border border-gray-100 flex-1 hover:shadow-md transition">
+                        <h4 class="font-bold text-gray-900">Formulation des recommandations</h4>
+                    </div>
+                </div>
+            </div>
+            <div class="relative pl-8 group">
+                <div class="absolute w-6 h-6 bg-gray-400 rounded-full -left-[13px] top-1 border-4 border-white shadow group-hover:scale-125 transition duration-300"></div>
+                <div class="flex flex-col md:flex-row md:items-center gap-2 md:gap-6">
+                    <div class="font-bold text-gray-500 w-20">12h00</div>
+                    <div class="bg-gray-100 p-4 rounded-xl border border-gray-200 flex-1 hover:shadow-md transition">
+                        <h4 class="font-bold text-gray-700">Clôture et Networking</h4>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="inscription" class="py-20 px-4 bg-gradient-to-b from-gray-50 to-gray-200">
+        <div class="max-w-xl mx-auto">
+            <div class="bg-white p-8 md:p-10 rounded-3xl shadow-2xl border border-gray-100 relative overflow-hidden">
+                <div class="absolute top-0 right-0 w-32 h-32 bg-blue-500 rounded-bl-full opacity-10 no-print"></div>
+
+                <div id="formContainer">
+                    <div class="text-center mb-8">
+                        <h2 class="text-3xl font-bold text-blue-900 mb-2">Réservez votre place</h2>
+                        <p class="text-gray-500">Générez instantanément votre Pass d'accès par QR Code.</p>
+                    </div>
+                    
+                    <form id="registrationForm" class="space-y-5">
+                        <div>
+                            <label class="block text-sm font-semibold text-gray-700 mb-1">Nom complet <span class="text-red-500">*</span></label>
+                            <div class="relative">
+                                <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                                    <i class="fa-regular fa-user text-gray-400"></i>
+                                </div>
+                                <input type="text" id="userName" required placeholder="Ex: Aminata Diallo" class="w-full pl-10 border border-gray-300 rounded-xl px-4 py-3 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition bg-gray-50 focus:bg-white">
+                            </div>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-semibold text-gray-700 mb-1">Adresse Email <span class="text-red-500">*</span></label>
+                            <div class="relative">
+                                <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                                    <i class="fa-regular fa-envelope text-gray-400"></i>
+                                </div>
+                                <input type="email" id="userEmail" required placeholder="Ex: aminata@entreprise.gn" class="w-full pl-10 border border-gray-300 rounded-xl px-4 py-3 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition bg-gray-50 focus:bg-white">
+                            </div>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-semibold text-gray-700 mb-1">Organisation / Institution <span class="text-red-500">*</span></label>
+                            <div class="relative">
+                                <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                                    <i class="fa-regular fa-building text-gray-400"></i>
+                                </div>
+                                <input type="text" id="userOrg" required placeholder="Ex: Ministère, WCS, Startup..." class="w-full pl-10 border border-gray-300 rounded-xl px-4 py-3 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition bg-gray-50 focus:bg-white">
+                            </div>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-semibold text-gray-700 mb-1">Profil</label>
+                            <select id="userProfile" class="w-full border border-gray-300 rounded-xl px-4 py-3 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition bg-gray-50 focus:bg-white text-gray-700">
+                                <option value="Institution">Institution Publique / Privée</option>
+                                <option value="Entrepreneur">Entrepreneur / Startup</option>
+                                <option value="Academique">Chercheur / Universitaire</option>
+                                <option value="Etudiant">Jeune professionnel / Étudiant(e)</option>
+                                <option value="Autre">Autre</option>
+                            </select>
+                        </div>
+                        <button type="submit" class="w-full bg-blue-900 text-white font-bold text-lg py-4 rounded-xl hover:bg-blue-800 transition duration-300 shadow-lg shadow-blue-900/30 mt-4 flex justify-center items-center">
+                            Générer mon Pass <i class="fa-solid fa-arrow-right ml-2"></i>
+                        </button>
+                    </form>
+                </div>
+
+                <div id="ticketResult" class="hidden flex-col items-center">
+                    <div class="w-full bg-blue-900 text-white p-6 rounded-t-2xl text-center mb-6">
+                        <p class="text-xs uppercase tracking-widest text-blue-300 mb-1">Pass Événementiel</p>
+                        <h3 class="font-bold text-2xl">IA & SIMANDOU</h3>
+                        <p class="text-sm mt-2 opacity-80"><i class="fa-regular fa-calendar mr-1"></i> 22 Février 2026</p>
+                    </div>
+                    
+                    <h3 id="displayName" class="font-bold text-2xl text-gray-900 mb-1 text-center"></h3>
+                    <p id="displayOrg" class="text-blue-600 font-medium mb-1 text-center"></p>
+                    <p id="displayProfile" class="text-gray-500 text-sm mb-6 text-center border-b pb-4 w-full"></p>
+                    
+                    <div class="bg-white p-3 border-2 border-dashed border-gray-300 rounded-2xl mb-6">
+                        <div id="qrcode"></div>
+                    </div>
+                    
+                    <div class="bg-green-50 text-green-700 text-sm px-4 py-3 rounded-lg w-full text-center mb-6 border border-green-200">
+                        <i class="fa-solid fa-circle-check mr-2"></i>Inscription validée. Présentez ce code à l'entrée.
+                    </div>
+
+                    <div class="flex gap-4 w-full no-print">
+                        <button onclick="window.print()" class="flex-1 bg-gray-800 hover:bg-gray-700 text-white font-medium py-3 rounded-xl transition flex justify-center items-center">
+                            <i class="fa-solid fa-print mr-2"></i> Imprimer
+                        </button>
+                        <button onclick="resetForm()" class="flex-1 bg-gray-200 hover:bg-gray-300 text-gray-800 font-medium py-3 rounded-xl transition flex justify-center items-center">
+                            Nouveau
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="bg-slate-900 text-gray-400 py-12 px-4 border-t border-slate-800">
+        <div class="max-w-6xl mx-auto flex flex-col md:flex-row justify-between items-center gap-6">
+            <div class="flex items-center text-white font-bold text-xl">
+                <i class="fa-solid fa-microchip text-guinea-yellow mr-2"></i>SIMANDOU.AI
+            </div>
+            <div class="text-sm text-center md:text-left">
+                &copy; 2026 Panel National sur l'IA et la Transformation des Organisations en Guinée.<br>
+                <span class="opacity-50">Initiative indépendante soutenue par le MPTEN.</span>
+            </div>
+            <div class="flex gap-4">
+                <a href="#" class="w-10 h-10 rounded-full bg-slate-800 flex items-center justify-center hover:bg-blue-600 hover:text-white transition"><i class="fa-brands fa-linkedin-in"></i></a>
+                <a href="#" class="w-10 h-10 rounded-full bg-slate-800 flex items-center justify-center hover:bg-blue-400 hover:text-white transition"><i class="fa-brands fa-twitter"></i></a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        function resetForm() {
+            document.getElementById('registrationForm').reset();
+            document.getElementById('formContainer').classList.remove('hidden');
+            document.getElementById('ticketResult').classList.add('hidden');
+            document.getElementById('ticketResult').classList.remove('flex');
+        }
+
+        document.getElementById('registrationForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            const name = document.getElementById('userName').value;
+            const email = document.getElementById('userEmail').value;
+            const org = document.getElementById('userOrg').value;
+            const profile = document.getElementById('userProfile').value;
+
+            // Données encodées dans le QR
+            const ticketData = JSON.stringify({
+                id: 'SIMAI-' + Math.floor(Math.random() * 100000),
+                nom: name,
+                email: email,
+                organisation: org,
+                profil: profile
+            });
+
+            // Masquer formulaire, afficher billet
+            document.getElementById('formContainer').classList.add('hidden');
+            const ticket = document.getElementById('ticketResult');
+            ticket.classList.remove('hidden');
+            ticket.classList.add('flex');
+
+            // Textes
+            document.getElementById('displayName').innerText = name;
+            document.getElementById('displayOrg').innerText = org;
+            document.getElementById('displayProfile').innerText = profile;
+
+            // Generation QR Code
+            document.getElementById('qrcode').innerHTML = ""; 
+            new QRCode(document.getElementById("qrcode"), {
+                text: ticketData,
+                width: 180,
+                height: 180,
+                colorDark : "#0f172a", // slate-900
+                colorLight : "#ffffff",
+                correctLevel : QRCode.CorrectLevel.H
+            });
+            
+            // Scroll doux vers le billet
+            ticket.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        });
+    </script>
+</body>
+</html>

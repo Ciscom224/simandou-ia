@@ -1230,7 +1230,7 @@
 
     <script>
         // L'URL de votre Google Apps Script (Remplacez-la par la vôtre !)
-        const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycby3CUqJfWgH8rqDqaDPjT01ugAhgBCn6ZZCRryGQymEvIzXmxFtWq21dZdr3NIKZHuy/exec";
+        const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/library/d/1V-Tf7sSC6s3hZWENALho_kaTBKrFX_y5QZO_2dTRdXG2Y0S-NxG39FrQ/2";
 
         function resetForm() {
             document.getElementById('registrationForm').reset();
@@ -1253,23 +1253,22 @@
             btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Création du Pass...';
             btn.disabled = true;
 
-            // Envoi à Google Sheets
+         // 1. On prépare les données comme un vrai formulaire HTML
+            const formData = new URLSearchParams();
+            formData.append('id', ticketId);
+            formData.append('nom', name);
+            formData.append('email', email);
+            formData.append('organisation', org);
+            formData.append('profil', profile);
+
+            // 2. Envoi silencieux à Google Sheets
             fetch(GOOGLE_SCRIPT_URL, {
                 method: "POST",
-              headers: {
-                    "Content-Type": "text/plain;charset=utf-8",
-                },
-                body: JSON.stringify({
-                    id: ticketId,
-                    nom: name,
-                    email: email,
-                    organisation: org,
-                    profil: profile
-                })
+                mode: "no-cors", // Ignore la sécurité stricte
+                body: formData   // On envoie le faux formulaire
             })
-            .then(response => response.json())
-            .then(data => {
-                // Création du lien d'activation (Ce lien sera caché dans le QR Code)
+            .then(() => {
+                // Succès ! On affiche le billet
                 const checkInUrl = GOOGLE_SCRIPT_URL + "?action=checkin&id=" + ticketId;
 
                 document.getElementById('formContainer').classList.add('hidden');
@@ -1281,7 +1280,6 @@
                 document.getElementById('displayOrg').innerText = org;
                 document.getElementById('displayProfile').innerText = profile;
 
-                // Génération du QR Code contenant le lien de Check-In
                 document.getElementById('qrcode').innerHTML = ""; 
                 new QRCode(document.getElementById("qrcode"), {
                     text: checkInUrl,
@@ -1297,7 +1295,7 @@
                 btn.disabled = false;
             })
             .catch(error => {
-                alert("Erreur de connexion. Veuillez réessayer.");
+                alert("Erreur de connexion internet.");
                 btn.innerHTML = originalBtnText;
                 btn.disabled = false;
             });
